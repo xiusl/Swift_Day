@@ -33,13 +33,22 @@ let sa = s + String(a)
 // if no String() -> Binary operator '+' cannot be applied to operands of type 'String' and 'Int'
 ```
 
-有一种简单的方式把值拼接到字符串中
+有一种简单的方式把值拼接到字符串中，使用**\\(\)**
 
 ```
 let a = 2
 let b = 4
 let s = "hello \(a) count"
 let t = "hello \(a + b) count"
+```
+
+使用 **“”“** 可以声明多行的字符串
+
+```
+let s = """
+I said "hello".
+And then I said "I belive peace & love" 
+"""
 ```
 
 
