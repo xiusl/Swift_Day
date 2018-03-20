@@ -77,7 +77,7 @@ var person = [:]
 
 使用 `if` 和  `switch` 进行条件控制，`for-in` 、`while` 和 `repeat-while` 进行循环控制
 
-判断、循环条件的圆口号 **\(\)** 是可选的，但判断、循环体的花括号 **{}** 是必须的    
+判断、循环条件的圆口号 **\(\)** 是可选的，但判断、循环体的花括号 **{}** 是必须的
 
 ```
 let scores = [75, 43, 102, 90, 22]
@@ -90,6 +90,31 @@ for socre in scores {
     }
 }
 print(teamScore) // 11
+```
+
+在 `if` 的条件中的类型必须是 `Boolean` 
+
+```
+if source { // error 不会默认的和零比较
+    // ...
+}
+```
+
+恩
+
+```
+var optionalStr: String? = "Hello"
+print(optionalStr == nil)
+
+var optionalName: String? = "xiu"
+// optionalName = nil
+var greeting = "Hello"
+if let name = optionalName {
+    greeting = "Hello, \(name)"
+    print(greeting)
+} else {
+    print(greeting)
+}
 ```
 
 
