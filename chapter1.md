@@ -92,7 +92,7 @@ for socre in scores {
 print(teamScore) // 11
 ```
 
-在 `if` 的条件中的类型必须是 `Boolean` 
+在 `if` 的条件中的类型必须是 `Boolean`
 
 ```
 if source { // error 不会默认的和零比较
@@ -100,7 +100,7 @@ if source { // error 不会默认的和零比较
 }
 ```
 
-恩
+可以使用 `if` 和 `let` 一起来处理值可能为空的情况，这些值相当于可选值，一个可选值要么存在一个值要么为空 `nil` ，使用 `?` 来标记一个变量的值是可选的
 
 ```
 var optionalStr: String? = "Hello"
