@@ -59,8 +59,37 @@ nameList[1] = "shilin"
 
 var person = [
     "name": "frank",
-    "sex": "male"
+    "phone": "123132"
 ]
+person["sex"] = "male"
+```
+
+创建空的数组、字典
+
+```
+let emptyArr = [String]()
+let emptyDict = [String: Float]()
+
+// 如果类型是可推断的
+var nameList = []
+var person = [:]
+```
+
+使用 `if` 和  `switch` 进行条件控制，`for-in` 、`while` 和 `repeat-while` 进行循环控制
+
+判断、循环条件的圆口号 **\(\)** 是可选的，但判断、循环体的花括号 **{}** 是必须的    
+
+```
+let scores = [75, 43, 102, 90, 22]
+var teamScore = 0
+for socre in scores {
+    if socre > 50 {
+        teamScore += 3
+    } else {
+        teamScore += 1
+    }
+}
+print(teamScore) // 11
 ```
 
 
