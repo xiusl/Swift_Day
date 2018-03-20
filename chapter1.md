@@ -51,5 +51,17 @@ And then I said "I belive peace & love"
 """
 ```
 
+使用 **\[\]** 来声明字典和数组
+
+```
+var nameList = ["jim", "tom", "frank", "wallte"]
+nameList[1] = "shilin"
+
+var person = [
+    "name": "frank",
+    "sex": "male"
+]
+```
+
 
 
