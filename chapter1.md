@@ -117,7 +117,7 @@ if let name = optionalName {
 }
 ```
 
- `switch` 支持任何类型的数据，在匹配到对应的 `case` 中，不需要明确的 `break` 来跳出
+`switch` 支持任何类型的数据，在匹配到对应的 `case` 中，不需要明确的 `break` 来跳出
 
 ```
 let vegetable = "red pepper"
@@ -178,6 +178,48 @@ for i in 0..<4 {
 print(total)
 // 0..<4 -> 0 1 2 3
 // 0...4 -> 0 1 2 3 4
+```
+
+使用 `func` 定义函数，使用 `funcName(param1:"",param2:"",...)` 调用函数，使用 `->` 来指定函数的返回值类型
+
+```
+func greet(person:String, day:String) -> String {
+    return "Hello \(person), today is \(day)"
+}
+greet(person:"xiu", day:"Tuesday")
+```
+
+使用 `_` 来指定不需要参数名，使用 ` ` \(空格\)来指定内部参数名和外部参数名 `on day` 
+
+```
+// on 为外部参数名，day 为内部参数名
+func greet(_ person:String, on day:String) -> String {
+    return "Hello \(person), today is \(day)"
+}
+greet("xiu", on:"Tuesday")
+```
+
+使用元组来返回多个混合的值
+
+```
+fun calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
+    var min = scores[0]
+    var max = scores[0]
+    var sum = 0
+    for score in scores {
+        if score > max {
+            max = score
+        } else if score < min {
+            min = score
+        }
+        sum += score
+    }
+    return (min, max, sum)
+}
+let statistics = calculateStatistics(scores:[5, 3, 100, 3, 9])
+print(statistics.sum)
+print(statistics.min)
+print(statistics.max)
 ```
 
 
