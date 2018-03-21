@@ -239,6 +239,7 @@ returnFifteen()
 函数作为一种对象，可以作为另一个函数的返回值或参数
 
 ```
+// 参数
 func makeIncrementer () -> ((Int)->Int) {
     func add (number: Int) -> Int {
         return 1 + number
