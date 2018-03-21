@@ -189,7 +189,7 @@ func greet(person:String, day:String) -> String {
 greet(person:"xiu", day:"Tuesday")
 ```
 
-使用 `_` 来指定不需要参数名，使用 ` ` \(空格\)来指定内部参数名和外部参数名 `on day` 
+使用 `_` 来指定不需要参数名，使用 ``` \(空格\)来指定内部参数名和外部参数名``on day\`
 
 ```
 // on 为外部参数名，day 为内部参数名
@@ -202,7 +202,7 @@ greet("xiu", on:"Tuesday")
 使用元组来返回多个混合的值
 
 ```
-fun calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
+func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
     var min = scores[0]
     var max = scores[0]
     var sum = 0
@@ -220,6 +220,33 @@ let statistics = calculateStatistics(scores:[5, 3, 100, 3, 9])
 print(statistics.sum)
 print(statistics.min)
 print(statistics.max)
+```
+
+函数可以嵌套使用，里层函数可是使用外层定义的变量，可以使用嵌套函数来组织冗长、复杂的代码
+
+```
+func returnFifteen () -> Int {
+    var y = 5
+    func add() {
+        y += 10
+    }
+    add()
+    return y
+}
+returnFifteen()
+```
+
+函数作为一种对象，可以作为另一个函数的返回值或参数
+
+```
+func makeIncrementer () -> ((Int)->Int) {
+    func add (number: Int) -> Int {
+        return 1 + number
+    }
+    return add
+}
+var incrementer = makeIncrementer()
+incrementer(7)
 ```
 
 
