@@ -117,5 +117,68 @@ if let name = optionalName {
 }
 ```
 
+ `switch` 支持任何类型的数据，在匹配到对应的 `case` 中，不需要明确的 `break` 来跳出
+
+```
+let vegetable = "red pepper"
+switch vegetable {
+    case: "celery": 
+        print("Add some raisins and make ants on a log.")
+    case: "cucumber", "watercress":
+        print("That would make a good tea sandwich")
+    case: let x where x.hasSuffix("pepper"):
+        print("Is it a spicy \(x)?")
+    default:
+        print("Everythin tastes good in soup.")
+}
+```
+
+使用 `for-in` 变量字典中的元素，可以同时得到 `key & value` ，字典是一个无序集合，遍历的顺序也是随机的
+
+```
+let interestingNumbers = [
+    "Prime": [2, 3, 5, 7, 11],
+    "Firbonacci": [1, 1, 2, 3, 5, 8],
+    "Square": [1, 4, 5, 9, 16, 25],
+]
+var largest = 0
+for (kind, numbers) in interestingNumbers {
+    for number in numbers {
+        if number > largest {
+            largest = number
+        }
+    }
+}
+print(largest)
+```
+
+使用 `while` 可以重复执行一段代码直到条件改变，循环条件可以在代码块最后出现，保证代码块至少执行一次
+
+```
+var n = 2
+while n < 100 {
+    n *= 2
+}
+print(n)
+
+var m = 2
+repeat {
+    m *= 2
+} while m < 100
+print(m)
+```
+
+使用 `..<` 可以生成指定范围的索引， `..<` 不包含结尾， `...` 包含结尾
+
+```
+var total = 0
+for i in 0..<4 {
+    total += i
+}
+print(total)
+// 0..<4 -> 0 1 2 3
+// 0...4 -> 0 1 2 3 4
+```
+
 
 
