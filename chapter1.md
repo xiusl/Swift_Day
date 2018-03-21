@@ -189,7 +189,7 @@ func greet(person:String, day:String) -> String {
 greet(person:"xiu", day:"Tuesday")
 ```
 
-使用 `_` 来指定不需要参数名，使用 ``` \(空格\)来指定内部参数名和外部参数名``on day\`
+使用 `_` 来指定不需要外部参数名，使用 ``` \(空格\)来指定内部参数名和外部参数名``on day\`
 
 ```
 // on 为外部参数名，day 为内部参数名
@@ -225,7 +225,7 @@ print(statistics.max)
 函数可以嵌套使用，里层函数可是使用外层定义的变量，可以使用嵌套函数来组织冗长、复杂的代码
 
 ```
-func returnFifteen () -> Int {
+func returnFifteen() -> Int {
     var y = 5
     func add() {
         y += 10
@@ -240,7 +240,7 @@ returnFifteen()
 
 ```
 // 返回值
-func makeIncrementer () -> ((Int)->Int) {
+func makeIncrementer() -> ((Int)->Int) {
     func add (number: Int) -> Int {
         return 1 + number
     }
@@ -248,7 +248,42 @@ func makeIncrementer () -> ((Int)->Int) {
 }
 var incrementer = makeIncrementer()
 incrementer(7)
+
 // 参数
+func hasAnyMatches(list: [Int], condition: (Int) -> Bool) ->Bool {
+    for item in list {
+        if condition(item) {
+            return true
+        }
+    }
+    return false
+}
+func lassThanTen(number: Int) -> Bool {
+    return number < 10
+}
+var numbers = [20, 19, 7, 12]
+hasAnyMatches(list: numbers, condition:lassThanTen)
+```
+
+函数闭包？？
+
+```
+var numbers = [20, 18, 2, 53]
+numbers.map({ (number: Int) -> Int in
+    let result = 3 * number
+    return result
+})
+```
+
+```
+var numbwes = [20, 12, 3, 31]
+let mappedNumbers = numbers.map({ number in 3 * number })
+print(mappedNumbers)
+```
+
+```
+let sortedNumbers = numbers.sorted { $0 > $1 }
+print(sortedNumbers)
 ```
 
 
