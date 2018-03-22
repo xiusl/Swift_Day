@@ -42,7 +42,7 @@ let s = "hello \(a) count"
 let t = "hello \(a + b) count"
 ```
 
-使用 **“”“** 可以声明多行的字符串\(**”“”**前后需要换行\)
+使用 **"""** 可以声明多行的字符串\(**"""**前后需要换行\)
 
 ```
 let s = """
@@ -286,5 +286,141 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
 print(sortedNumbers)
 ```
 
+使用 `class` 关键字和类名来创建一个类，类属性的声明方式与常量、变量的声明方式相同，除了属性是在类中，同样的方法的声明方式和函数一样
 
+```
+class Shape {
+	var numberOfSides = 0
+	func simpleDescription() -> String {
+		return "A shape with \(numbersOfSides) sides."
+	}
+	let count = 10
+	func showAny(p: String) {
+		print(p)
+	}
+}
+```
 
+使用类名+ `()` 创建类实例，使用 `.` 来访问类的属性、调用类方法
+
+```
+var shape = Shape()
+shape.numberOfSides = 4
+var shapeDesc = shape. simpleDescription()
+```
+
+上面的 `Shape` 类少了一个很重要的东西。当实例被创建的时候，需要一个初始化函数来初始化类中的一些值。使用 `init` 创建
+
+```
+class NamedShape {
+	var numberOfSides: Int = 0
+	var name: String
+	
+	init(name: String) {
+		self.name = name
+	}
+	
+	func simpleDescription() -> String {
+		return "A shape with \(numbersOfSides) sides."
+	}
+}
+```
+
+注意 `self` 被用来区分属性中的 `name` 和 方法参数中的 `name` 。当你创建一个类的实例时，用于初始化的参数会像方法调用一样被传递。每个属性都必须被指定一个值，或者在属性声明的时候，或者在类实例初始化的时候
+
+当你需要的在实例释放的时候清理一些资源的时候，使用 `deinit` 可以定义一个析构方法，他会在实例释放的时候调用
+
+子类的声明是在类名后使用 `:` 链接父类名，类不是必须要有一个父类的，你可以根据需求来包括、删除父类
+
+子类中的方法使用 `override` 关键字将会覆盖父类中相同方法的实现。如果意外地重写了父类的方法，并且没有使用 `override`，编译器将会报错。当子类中使用了 `override` 但父类中没有相应的方法时，编译器也会报错
+
+```
+class Circle: NamedShape {
+	var radius: Double
+	
+	init(radius: Double, name: String) {
+		self. radius = radius
+		suprt.init(name: name)
+		numberOfSides = 0
+	}
+	
+	func area () -> Double {
+		return radius * radius * M_PI
+	}
+	
+	override func simpleDescription() -> String {
+		return "A circle with radius of length \(radius)."
+	}
+}
+let test = Circle(radius: 4.2, name: "Tesr circle")
+test.area()
+test.simlpeDescription()
+```
+
+除了包含简单的属性，类的属性还可以拥有 `getter` 、 `setter` 方法
+
+```
+class EquilateralTriangle: NamedShape {
+	var sideLength: Double = 0.0
+	
+	init(sideLength: Double, name: String) {
+		self.sideLength = sideLength
+		super.init(name: name)
+		numberOfSides = 3
+	}
+	
+	var perimeter: Double {
+		get {
+			return 3.0 * sideLength
+		}
+		set {
+			sideLength = newValue / 3.0
+		}
+	}
+	
+	override func simpleDescription() -> String {
+		return "An equilateral triangle with sides of length\(sideLength)."
+	}
+}
+var triangle = EqauilateralTriangle(sideLength: 2.1, name: "a Triangle")
+print(triangle.perimeter)
+triangle.perimeter = 12.9
+print(triangle.sideLength)
+```
+
+在 `peerimeter` 的 `setter` 中，新的值会被默认的定义为 `newValue`，你可以在 `set` 后使圆括号 `()` 来提供一个确定的名字
+
+注意在 `EquilateralTriangle` 类初始化的时候执行了三个不同的步骤
+
+- 设置子类中定义的属性值
+- 调用父类的初始化方法
+- 改变父类中属性的值。一些额外的设置工作（调用方法、取值、设置值）也可以在这执行，
+
+如果你不需要去计算属性的值，但仍然需要在属性设置值的时候执行一些方法，使用 `willSet` 和 `didSet` 。你提供的代码会初始方法外任何属性值改变的时候被调用
+
+```
+class TriangleAndSquare {
+	var triangle: EquilateralTriangle {
+		willSet {
+			square.sideLength = newValue.sideLength
+		}
+	}
+	var square: Square {
+		willSet {
+			triangle.sideLength = newValue.sideLength
+		}
+	}
+	init(size: Double, name: String) {
+		square = Square(sideLength: size, name: name)
+		triangle = EquilateralTriangle(sideLength: size, name: name)
+	}
+}
+var triangleAndSquare = TriangleAndSquare(size: 10, name:"another test shape")
+print(triangleAndSquare.square.sideLength) // 10
+print(triangleAndSquare.triangle.sideLength) // 10
+triangleAndSquare.square = Square(sideLength: 50, name:"Large square")
+print(triangleAndSquare.triangle.sideLength) // 50
+```
+
+在使用可选值时，你可以在调用方法、读取属性、下标操作前使用 `?` 。如果 `?` 前的值为 `nil` ，在 `?` 后面的所有操作都会被忽略，并且整个表达式的值也会为 `nil`。
+<del>否则，可选值会被拆箱，`?` 后面的所有东西都会遵从这个拆箱的值</del>。在这两种情况，整个表达式的值是一个可选类型
