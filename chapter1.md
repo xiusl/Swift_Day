@@ -424,3 +424,38 @@ print(triangleAndSquare.triangle.sideLength) // 50
 
 在使用可选值时，你可以在调用方法、读取属性、下标操作前使用 `?` 。如果 `?` 前的值为 `nil` ，在 `?` 后面的所有操作都会被忽略，并且整个表达式的值也会为 `nil`。
 <del>否则，可选值会被拆箱，`?` 后面的所有东西都会遵从这个拆箱的值</del>。在这两种情况，整个表达式的值是一个可选类型
+
+```
+let optionalSquare: Square = Square(sideLength: 2.5, name: "opional square")
+let sideLength = optionalSquare?.sideLength
+```
+
+使用 `enum` 创建一个枚举，<del>像类和所有其他的类型，枚举可以使用方法组合他们</del>
+
+```
+enum Rank: Int {
+	case ace = 1
+	case two, three, four, five, six, seven, eight, nine, ten
+	case jack, queen, king
+	func simpeDescription() -> String {
+		switch self {
+			case .ace:
+				return "ace"
+			case .jack:
+				return "jack"
+			case .queen:
+				return "queen"
+			case .king:
+				return "king"
+			default:
+				return String(self.rawValue)
+		}
+	}
+}
+let ace = Rank.ace
+let aceRawValue = ace.rawValue
+```
+
+默认情况下，Swift 从零开始给每行赋值，每次回自动增长，但是你也可以改变这个行为通过确切的表明它的值。上面的例子 `ace` 被明确的赋值为 1，接下来的值会被按顺序赋值。你也可以使用字符串或浮点数作为一个枚举每行的值类型。使用 `rawValue` 属性去读取枚举每行具体的值
+
+使用 `init?(rawValue:)` 初始化一个枚举实例
