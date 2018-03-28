@@ -456,6 +456,65 @@ let ace = Rank.ace
 let aceRawValue = ace.rawValue
 ```
 
-默认情况下，Swift 从零开始给每行赋值，每次回自动增长，但是你也可以改变这个行为通过确切的表明它的值。上面的例子 `ace` 被明确的赋值为 1，接下来的值会被按顺序赋值。你也可以使用字符串或浮点数作为一个枚举每行的值类型。使用 `rawValue` 属性去读取枚举每行具体的值
+默认情况下，Swift 从零开始给每行赋值，每次回自动增长，但是你也可以改变这个行为通过确切的表明它的值。上面的例子 `ace` 被明确的赋值为 1，接下来的值会被按顺序赋值。你也可以使用字符串或浮点数作为一个枚举每行的值类型。使用 `rawValue` 属性去读取一个枚举 `case` 值的原始值
 
-使用 `init?(rawValue:)` 初始化一个枚举实例
+使用 `init?(rawValue:)` 从原始数值初始化一个枚举实例，将会返回一个与这个原始值相对应的枚举 `case` 值 或者是一个 `nil`
+
+```
+if let convertedRank = Rank(rawValue: 3) {
+	let threeDescripation = convertedRank.simpleDescripation()
+}
+```
+枚举的 `case` 值是一个真实的值， 不仅仅是写的原始值。事实上，在 cases 中如果没有一个有意义的原始值，你不必要去提供一个。(*Inaccurate*)
+
+```
+enum Suit {
+	case spades, hearts, diamonds, clubs
+	func simpleDescription() -> String {
+		switch self {
+			case .spades:
+				return "spades"
+			case .hearts:
+				return "hearts"
+			case .diamonds:
+				return "diamonds"
+			case .clubs:
+				return "clubs"
+		}
+	}
+	func color() -> String () {
+		switch self {
+			case .spades, .clubs:
+				return "black"
+			case .hearts, .diamonds:
+				return "red"
+		}
+	}
+}
+let hearts = Suit.hearts
+let heartsDescription = hearts.simpleDescription()
+
+```
+
+注意在上面中 `hearts` 被使用的两种方式，当给常量 `hearts` 赋值的时候，因为这个常量没有一个明确的指明类型，所以这个枚举 case `Suit.hearts` 被引用通过一个全称。在`switch` 中，因为已经知道了 case 的明确类型 `Suit`，因此 这个枚举 case 被使用通过一个缩写 `.hearts`. 在值的类型已知的情况下，你可以在任何时候是用缩写形式。
+
+如果一个枚举有原始值，这些值作为声明的一部分被明确 (*Inaccurate*)
+(*觉得理解的不是很清楚，暂时跳过一点*)
+
+```
+enum ServerResponse {
+	case result(String, String)
+	case failure(String)
+}
+
+let success = ServerResponse.result("6:00 am", "8:09 pm")
+let failure = ServerResponse.failure("Out of cheese.")
+
+switch success {
+	case let .result(sunrise, sunset):
+		print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+	case let .faulure(message):
+		print("Failure: \(message)")
+}
+```
+
