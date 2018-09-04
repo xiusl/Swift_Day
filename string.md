@@ -59,7 +59,7 @@ aStr.append(aChar) // thea
 
 #### 拼接
 
-* 使用 `+` 运算符来连接两个字符串
+* 使用 `+` 运算符来连接两个字符串。
 
 ```
 let str1 = "pick"
@@ -67,14 +67,60 @@ let str2 = "haha"
 var newStr = str1 + str2  // pickhaha
 ```
 
-* 使用 `+=` 运算符在现有字符串后追加字符串
+* 使用 `+=` 运算符在现有字符串后追加字符串。
 
 ```
 var str = "pick"
 str += "haha"  // pickhaha
 ```
 
-#### 
+#### 字符串插值
+
+* 混合常量、变量、字面值和表达式字符串构造新的字符串。
+* 插入的值使用 `()` 包裹，以 `\` 作为前缀。
+
+```
+let multiplier = 3
+let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
+// 3 times 2.5 is 7.5
+```
+
+#### Unicode
+
+* 一种在不同书写系统中编码、表示和处理文本的统一标准。
+* Swift 中的`String` 和 `Character` 是完全 Unicode 兼容的。
+* Unicode 标量。???
+
+#### 特殊字符
+
+* 转义字符  `\` 。
+
+```
+\0 空字符，\\ 反斜杠，\t 水平制表符，\n 换行符，\r 回车，\" 双引号，\' 单引号
+```
+
+* `Unicode` 标量， `\u{n}`~~ n是一个  1-8 个与合法 Unicode 码位相等的 16 进制数字~~。??
+
+```
+let dollar = "\u{24}"   // $，U+0024
+let heart = "\u{2665}"  // ❤，U+2665
+let sparkling = "\u{1F496}"  // ?，U+1F496
+```
+
+#### 拓展字形
+
+* ???
+
+#### 字符统计
+
+* 获取字符串长度，`String` 中 `Character` 的个数，`String` 的 `count` 属性。
+
+```
+let unusualManagerie = "Koala?, Snail?,"
+print("unusualManagerie has \(unusualManagerie.count) characters.")
+```
+
+#### 字符串索引
 
 
 
