@@ -101,5 +101,70 @@ print(incrementByTen())  // 10
 print(incrementByTen())  // 20
 ```
 
+#### 闭包引用类型
+
+```swift
+let alsoIncrementByTen = incrementByTen
+alseIncrementByTen() // 30
+```
+
+#### 逃逸闭包
+
+* ??
+* `@escaping` 关键字
+
+```swift
+var completionHandles:[() -> Void] = []
+
+func someFunctionWithEscapingClosure(completionHandle: @escaping () -> Void) {
+//    completionHandle()
+    completionHandles.append(completionHandle)
+}
+func someFunctionWithNonescapingClosure(closure: () -> Void) {
+    closure()
+}
+
+class SomeClass {
+    var x = 10
+    func doSomething() {
+        someFunctionWithEscapingClosure(completionHandle: { self.x = 100 })
+        someFunctionWithEscapingClosure {
+            self.x = 50
+        }
+        
+        someFunctionWithNonescapingClosure(closure: { x = 200 })
+        someFunctionWithNonescapingClosure {
+            x = 222
+        }
+    }
+}
+
+let instance = SomeClass()
+instance.doSomething()
+print(instance.x)
+
+completionHandles.first?()
+print(instance.x)
+completionHandles.last?()
+print(instance.x)
+```
+
+#### 自动闭包
+
+* ??
+
+```swift
+var customersInLine = ["Chirs", "Alex", "Ewa", "Barry"]
+
+let customerProvider = { customersInLine.remove(at: 0) }
+
+//func simpleRemove() -> String {
+//    return customersInLine.remove(at: 0)
+//}
+//let customerProvider = simpleRemove()
+
+print(customerProvider())
+```
+
 
 
