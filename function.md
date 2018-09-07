@@ -153,3 +153,9 @@ print(someFunction(12)) // 12
 print(someFunction())   // 1
 ```
 
+#### 可变形式参数
+
+* 一个可变
+
+
+
