@@ -131,7 +131,7 @@ class SomeClass {
         someFunctionWithEscapingClosure {
             self.x = 50
         }
-        
+
         someFunctionWithNonescapingClosure(closure: { x = 200 })
         someFunctionWithNonescapingClosure {
             x = 222
