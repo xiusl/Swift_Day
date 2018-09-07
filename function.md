@@ -170,6 +170,7 @@ func arithmeticMean(_ numbers: Double...) -> Double {
 arithmeticMean(1, 3, 5, 6)
 arithmeticMean(1.2, 23.4.25, 2.5, 21.0)
 ```
+
 #### 输入输出形式参数
 
 * 在函数内修改一个形式参数的值，在函数结束后改变依然生效。
@@ -248,7 +249,7 @@ func chooseStepFunction:(backwards: Bool) -> (Int) -> Int {
 }
 
 var currentNum = 3
-let moveNearerToZero = chooseStepFunction(backwards: currentNum)
+let moveNearerToZero = chooseStepFunction(backwards: currentNum > 0)
 while currentNum > 0 {
     print(currentNum)
     currentNum = moveNearerToZero(currentNum)
@@ -264,8 +265,21 @@ print(currentNum)
 
 ```swift
 func chooseStepFunction:(backwards: Bool) -> (Int) -> Int {
-    
+    func setForward(_ input: Int) -> Int { return input + 1 }
+    func setBackward(_ input: Int) -> Int { return input - 1 }
+    return backwards ? setForward : setBackward
 }
+var currentNum = -3
+let moveNearerToZero = chooseStepFunction(backwards: currentNum > 0)
+while currentNum > 0 {
+    print(currentNum)
+    currentNum = moveNearerToZero(currentNum)
+}
+print(currentNum)
+// -3
+// -2
+// -1
+// 0
 ```
 
 
