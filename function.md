@@ -144,5 +144,12 @@ someFunction(1, secondParamName: 2)
 * 在形式参数类型后为形式参数指定一个默认的值。
 * 在调用函数的时候存在默认值的形式参数可以省略。
 
+```swift
+func someFunction(paramName: Int = 1) {
+    return paramName
+}
 
+print(someFunction(12)) // 12
+print(someFunction())   // 1
+```
 
