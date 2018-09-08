@@ -5,4 +5,5 @@
 * [String](string.md)
 * [Function](function.md)
 * [Closure](closure.md)
+* [Classes & Structures](classes-and-structures.md)
 
