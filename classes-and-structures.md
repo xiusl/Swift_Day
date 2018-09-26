@@ -88,7 +88,7 @@ print("cinema width: \(cinema.width)") // cinema width: 2048
 
 ```swift
 
-
 ```
+
 
 
