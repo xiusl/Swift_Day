@@ -87,8 +87,12 @@ print("cinema width: \(cinema.width)") // cinema width: 2048
 * 当被赋值给常量、变量，传递给函数的时候，不会发生拷贝，而是对当前实例的一个**引用**。
 
 ```swift
-
+let tenEighty = VideoMode()
+tenEighty.resolution = hd
+tenEighty.interlaced = true
+tenEighty.name = '1080i'
+tenEighty.frameRate = 25.0
 ```
 
-
+声明了一个新的名叫 `tenEighty` 的常量并且设置它引用了一个 \`VideoMode\` 类的新实例，这个视频复制了之前的 1920 x 1080的 HD 分辨率，同时设置为隔行扫描，并给予了一个名字 1080i，设置了 25.0 帧每秒的频率。
 
